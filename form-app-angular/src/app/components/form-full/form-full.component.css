@@ -1,0 +1,111 @@
+.body-full{
+    background: rgb(158, 201, 218);
+    height: 700px;
+    width: 200%;
+    padding-top: 5px;
+    overflow-y: scroll;
+    overflow: auto;
+    font-size: 18px;
+}
+
+.center {
+    margin-top: 20px;
+    text-align: center;
+}
+
+.centerLanguage {
+    float: center;
+}
+
+.centerLanguage button {
+    font-size: 20px;
+    margin-right: 20px;
+}
+
+
+.alignRight{
+    background: rgb(62, 95, 138);
+    border: 1px solid blue;
+    margin-right: 25px;
+    float: right;
+    text-align: left;
+    border-radius: 25px;
+    width: 60%;
+    padding-left: 10px;
+    color: white;
+    font-size: 18px;
+}
+
+.clearfix{
+    clear:both;
+    float:none;
+}
+
+.chatLeft{
+    background: rgb(255, 255, 255);
+    border: 1px solid blue;
+    max-width: 75%;
+    border-radius: 10px;
+    margin-bottom: 5px;
+    margin-left: 25px;
+    text-align: center;
+    margin-top: 5px;
+}
+
+.numberInput {
+    text-align: center;
+}
+
+input[type='radio']:after {
+    width: 15px;
+    height: 15px;
+    border-radius: 15px;
+    top: -2px;
+    left: -1px;
+    position: relative;
+    background-color: #d1d3d1;
+    content: '';
+    display: inline-block;
+    visibility: visible;
+    border: 2px solid white;
+}
+
+input[type='radio']:checked:after {
+    width: 15px;
+    height: 15px;
+    border-radius: 15px;
+    top: -2px;
+    left: -1px;
+    position: relative;
+    background-color: #ffa500;
+    content: '';
+    display: inline-block;
+    visibility: visible;
+    border: 2px solid white;
+}
+
+input[type='checkbox']:after {
+    width: 15px;
+    height: 15px;
+    top: -2px;
+    left: -1px;
+    position: relative;
+    background-color: #d1d3d1;
+    content: '';
+    display: inline-block;
+    visibility: visible;
+    border: 2px solid white;
+}
+
+input[type='checkbox']:checked:after {
+    width: 15px;
+    height: 15px;
+    top: -2px;
+    left: -1px;
+    position: relative;
+    background-color: #ffa500;
+    content: '';
+    display: inline-block;
+    visibility: visible;
+    border: 2px solid white;
+}

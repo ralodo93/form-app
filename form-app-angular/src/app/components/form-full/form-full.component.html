@@ -1,39 +1,493 @@
-<div class="center">
-    <section id="content">
-        <form class="mid-form" #userForm='ngForm' (ngSubmit)="onSubmit()">
+<div class="body-full">
+    <div class="center">
+        <p>Select language / Selecciona idioma:</p>
+        <div class="centerLanguage">
+            <button value="english" (click)="getLang($event)">English</button>
+            <button value="spanish" (click)="getLang($event)">Español</button>
+        </div>
 
-            <div class="form-group radibuttons">
-                <input type="radio" name="genero" value="hombre" #gender="ngModel" [(ngModel)]="user.gender" required />
-                Hombre
-                <input type="radio" name="genero" value="mujer" #gender="ngModel" [(ngModel)]="user.gender" /> Mujer
-                <input type="radio" name="genero" value="otro" #gender="ngModel" [(ngModel)]="user.gender" /> Otro
-                <small *ngIf="!gender.valid && gender.touched">El género no es válido</small>
-            </div>
+        <div class="center" *ngIf="lang=='spanish' && startSurvey">
+            <section id="content">
+                <form class="mid-form">
 
-            <div class="form-group" *ngIf="user.gender">
-                <label for="edad">Edad</label>
-                <input type="number" name="edad" #ageval (keyup.enter)="updateAgeVal(ageval.value)" required />
-                <small *ngIf="!ageval.valid && ageval.touched">El campo no es válido</small>
-            </div>
+                    <div class="chatLeft" *ngIf="time>=500">Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                        Cras blandit eleifend pharetra. Nulla ante urna, vehicula ac est et, tincidunt condimentum
+                        velit.</div>
+                    <div class="chatLeft" *ngIf="time>=1000">Nulla at nulla eget lectus ultrices sollicitudin ac a
+                        turpis. Ut consequat arcu non velit dignissim consequat. Suspendisse potenti. Nulla sit amet
+                        enim mauris</div>
+                    <div class="chatLeft" *ngIf="time>=1500">Nulla at nulla eget lectus ultrices sollicitudin ac a
+                        turpis. Ut consequat arcu non velit dignissim consequat. Suspendisse potenti. Nulla sit amet
+                        enim mauris</div>
 
-            <div class="form-group" *ngIf="user.age && user.gender">
-                <label for="calle">Calle</label>
-                <input type="text" name="calle" #address (keyup.enter)="updateAddress(address.value)" required required
-                    pattern="[a-zA-Z]+" />
-            </div>
+                    <!--Gender-->
+                    <div class="form-group" *ngIf="time>=2000" scrollTo>
+                        <div class="chatLeft">¿Hombre?¿Mujer? Seleccione una de las opciones</div>
+                        <div class="alignRight">
+                            <input type="radio" name="gender" value="male" #gender="ngModel" [(ngModel)]="user.gender">
+                            Hombre <br />
+                            <input type="radio" name="gender" value="female" #gender="ngModel"
+                                [(ngModel)]="user.gender">
+                            Mujer<br />
+                            <input type="radio" name="gender" value="other" #gender="ngModel" [(ngModel)]="user.gender">
+                            Otro<br />
+                            <input type="radio" name="gender" value="not response" #gender="ngModel"
+                                [(ngModel)]="user.gender"> Prefiero no decirlo <br />
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
 
-            <div class="form-group" *ngIf="user.address && user.address != '' && user.age && user.gender">
-                <label for="calle">Codigo Postal</label>
-                <input type="text" name="calle" #address (keyup.enter)="updateCP(address.value)" required required
-                    pattern="[a-zA-Z]+" />
-            </div>
+                    <!--Age-->
+                    <div class="form-group" *ngIf="user.gender" scrollTo>
+                        <div class="chatLeft">¿Cual es tu edad?</div>
+                        <input type="number" name="age" #age (keyup.enter)="updateAge(age.value)"
+                            class="alignRight numberInput" required />
+                    </div>
+                    <div class="clearfix"></div>
 
-            <div class="clearfix"></div>
+                    <!--Address-->
+                    <div class="form-group" *ngIf="user.gender && user.age" scrollTo>
+                        <div class="chatLeft">¿Cual es tu calle?</div>
+                        <input type="text" name="address" #address (keyup.enter)="updateAddress(address.value)"
+                            class="alignRight numberInput" required />
+                    </div>
+                    <div class="clearfix"></div>
 
-            <div *ngIf="user.cp && user.cp != ''">
-                <input type="submit" value="Enviar" class="btn btn-success" [disabled]="userForm.invalid" />
-            </div>
+                    <!--PostalCode-->
+                    <div class="form-group" *ngIf="user.address && user.address != '' && user.age && user.gender"
+                        scrollTo>
+                        <div class="chatLeft">¿Codigo postal?</div>
+                        <input type="text" name="pc" #pc (keyup.enter)="updatePC(pc.value)"
+                            class="alignRight numberInput" required />
+                    </div>
+                    <div class="clearfix"></div>
 
-        </form>
-    </section>
+                    <!--Job-->
+                    <div class="form-group"
+                        *ngIf="user.address && user.address != '' && user.age && user.gender && user.postalCode && user.postalCode != ''"
+                        scrollTo>
+                        <div class="chatLeft">¿En que trabajas?</div>
+                        <div class="alignRight">
+                            <input type="radio" name="job" value="healthcare personnel" #gender="ngModel"
+                                [(ngModel)]="user.job">
+                            Personal sanitario<br />
+                            <input type="radio" name="job" value="security forces" #gender="ngModel"
+                                [(ngModel)]="user.job">
+                            Cuerpo de seguridad<br />
+                            <input type="radio" name="job" value="food industry" #gender="ngModel"
+                                [(ngModel)]="user.job"> Alimentación<br />
+                            <input type="radio" name="job" value="transport" #gender="ngModel" [(ngModel)]="user.job">
+                            Transporte<br />
+                            <input type="radio" name="job" value="cleaning" #gender="ngModel" [(ngModel)]="user.job">
+                            Limpieza<br />
+                            <input type="radio" name="job" value="commerce" #gender="ngModel" [(ngModel)]="user.job">
+                            Comercios<br />
+                            <input type="radio" name="job" value="construction" #gender="ngModel"
+                                [(ngModel)]="user.job">
+                            Construcción<br />
+                            <input type="radio" name="job" value="other" #gender="ngModel" [(ngModel)]="user.job">
+                            Otro<br />
+                            <div *ngIf="user.job == 'other'" scrollTo>
+                                <p>¿Cuál?</p>
+                                <input style="background: white; color: black;" type="text" name="job" #job
+                                    (keyup.enter)="getOtherJob(job.value)" class="alignRight numberInput" required />
+                            </div>
+
+                            <div *ngIf="otherJobTouched" scrollTo>
+                                <p>¿Cuál?</p>
+                                <input style="background: white; color: black;" type="text" name="job" #job
+                                    (keyup.enter)="getOtherJob(job.value)" class="alignRight numberInput" value={{user.job}} required />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
+
+
+                    <!--Symptons-->
+                    <div *ngIf="user.address && user.address != '' && user.age && user.gender && user.postalCode && user.postalCode != '' && user.job && user.job != '' && user.job != 'other'"
+                        scrollTo>
+                        <div class="chatLeft">¿Qué síntomas tiene?</div>
+
+                        <div class="alignRight" *ngFor="let sympton of symptons" scrollTo>
+                            <input (change)="onChangeSymptons(sympton.value, $event.target.checked)"
+                                name="{{ sympton.name_es }}" type="checkbox" id="{{sympton.name_es}}">
+                            <label class="form-check-label" for="{{sympton.name_es}}">
+                                {{sympton.name_es}}
+                            </label>
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
+
+                    <!--Diagnosis-->
+                    <div
+                        *ngIf="user.address && user.address != '' && user.age && user.gender && user.postalCode && user.postalCode != '' && user.job && user.job != '' && user.job != 'otro' && user.symptons.length >= 1">
+                        <div class="chatLeft">¿Tiene alguna patología previa?</div>
+
+                        <div class="alignRight" *ngFor="let diagno of diagnos">
+                            <input (change)="onChangeDiagnosis(diagno.value, $event.target.checked)"
+                                name="{{ diagno.name_es }}" type="checkbox" id="{{diagno.name_es}}">
+                            <label class="form-check-label" for="{{diagno.name_es}}">
+                                {{diagno.name_es}}
+                            </label>
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
+
+                    <!--Smoke-->
+                    <div class="form-group"
+                        *ngIf="user.address && user.address != '' && user.age && user.gender && user.postalCode && user.postalCode != '' && user.job && user.job != '' && user.job != 'otro' && user.symptons.length >= 1 && user.diagnosis.length >= 1"
+                        scrollTo>
+                        <div class="chatLeft">¿Fuma?</div>
+                        <div class="alignRight">
+                            <input type="radio" name="smoke" value="yes" #smoke="ngModel" [(ngModel)]="user.smoke">
+                            Fumo actualmente <br />
+                            <input type="radio" name="smoke" value="less than five" #smoke="ngModel"
+                                [(ngModel)]="user.smoke">
+                            Llevo menos de 5 años sin fumar <br />
+                            <input type="radio" name="smoke" value="more than five" #smoke="ngModel"
+                                [(ngModel)]="user.smoke">
+                            Llevo más de 5 años sin fumar <br />
+                            <input type="radio" name="smoke" value="no" #smoke="ngModel" [(ngModel)]="user.smoke">
+                            Nunca he fumado <br />
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
+
+                    <!--Test-->
+                    <div class="form-group"
+                        *ngIf="user.address && user.address != '' && user.age && user.gender && user.postalCode && user.postalCode != '' && user.job && user.job != '' && user.job != 'otro' && user.symptons.length >= 1 && user.diagnosis.length >= 1 && user.smoke"
+                        scrollTo>
+                        <div class="chatLeft">Referente a la enfermedad del COVID-19. ¿Ha sido diagnosticado de la
+                            enfermedad por un test?</div>
+                        <div class="alignRight">
+                            <input type="radio" name="test" value="yes" #test="ngModel" [(ngModel)]="user.test">
+                            Si <br />
+                            <input type="radio" name="test" value="no" #test="ngModel" [(ngModel)]="user.test">
+                            No <br />
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
+
+                    <!--Date-->
+                    <div class="form-group" *ngIf="user.test == 'yes'" scrollTo>
+                        <div class="chatLeft">¿En que fecha fue diagnosticado?</div>
+                        <div class="alignRight">
+                            <input type="date" name="date" #date="ngModel" [(ngModel)]="user.date" />
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
+
+                    <!--Where-->
+                    <div class="form-group" *ngIf="user.test == 'yes' && user.date" scrollTo>
+                        <div class="chatLeft">En caso de haber sido diagnosticado de la enfermedad de COVID-19. ¿Dónde
+                            está actualmente?</div>
+                        <div class="alignRight">
+                            <input type="radio" name="where" value="isolated home" #gender="ngModel"
+                                [(ngModel)]="user.where">
+                            Aislado en casa<br />
+                            <input type="radio" name="where" value="hotel" #gender="ngModel" [(ngModel)]="user.where">
+                            En un hotel<br />
+                            <input type="radio" name="where" value="hospitalized" #gender="ngModel"
+                                [(ngModel)]="user.where"> Hospitalizado<br />
+                            <input type="radio" name="where" value="recovered home" #gender="ngModel"
+                                [(ngModel)]="user.where">
+                            Recuperado de la infección y en casa<br />
+                            <input type="radio" name="where" value="other" #gender="ngModel" [(ngModel)]="user.where">
+                            Otro<br />
+                            <div *ngIf="user.where == 'other'" scrollTo>
+                                <p>¿Cuál?</p>
+                                <input style="background: white; color: black;" type="text" name="where" #where
+                                    (keyup.enter)="getOtherWhere(where.value)" class="alignRight numberInput" required />
+                            </div>
+
+                            <div *ngIf="otherWhereTouched" scrollTo>
+                                <p>¿Cuál?</p>
+                                <input style="background: white; color: black;" type="text" name="where" #where
+                                    (keyup.enter)="getOtherWhere(where.value)" class="alignRight numberInput" value={{user.where}} required />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
+
+                    <!--infection-->
+                    <div class="form-group" *ngIf="user.test == 'yes' && user.date && user.where != 'other' && user.where" scrollTo>
+                        <div class="chatLeft">¿Cómo cree que ha sido contagiado?</div>
+                        <div class="alignRight">
+                            <input type="radio" name="infection" value="international travel" #gender="ngModel"
+                                [(ngModel)]="user.infection">
+                            Por un viaje internacional<br />
+                            <input type="radio" name="infection" value="national travel" #gender="ngModel"
+                                [(ngModel)]="user.infection">
+                            Por un viaje nacional<br />
+                            <input type="radio" name="infection" value="work" #gender="ngModel"
+                                [(ngModel)]="user.infection"> En el trabajo<br />
+                            <input type="radio" name="infection" value="family" #gender="ngModel"
+                                [(ngModel)]="user.infection">
+                            Por un familiar o conviviente directo<br />
+                            <input type="radio" name="infection" value="other" #gender="ngModel"
+                                [(ngModel)]="user.infection">
+                            Otro<br />
+                            <div *ngIf="user.infection == 'other'" scrollTo>
+                                <p>¿Cuál?</p>
+                                <input style="background: white; color: black;" type="text" name="infection" #infection
+                                    (keyup.enter)="getOtherInfection(infection.value)" class="alignRight numberInput" required />
+                            </div>
+
+                            <div *ngIf="otherInfectionTouched" scrollTo>
+                                <p>¿Cuál?</p>
+                                <input style="background: white; color: black;" type="text" name="infection" #infection
+                                    (keyup.enter)="getOtherInfection(infection.value)" class="alignRight numberInput" value={{user.infection}} required />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
+
+                    <div *ngIf="user.test == 'no' || (user.date && user.where && user.infection && user.infection != 'other')" scrollTo>
+                        <input type="submit" value="Enviar" class="center" (click)="Submit()" />
+                    </div>
+                </form>
+            </section>
+        </div>
+
+        <div class="center" *ngIf="lang=='english' && startSurvey">
+            <section id="content">
+                <form class="mid-form">
+
+                    <div class="chatLeft" *ngIf="time>=500">Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                        Cras blandit eleifend pharetra. Nulla ante urna, vehicula ac est et, tincidunt condimentum
+                        velit.</div>
+                    <div class="chatLeft" *ngIf="time>=1000">Nulla at nulla eget lectus ultrices sollicitudin ac a
+                        turpis. Ut consequat arcu non velit dignissim consequat. Suspendisse potenti. Nulla sit amet
+                        enim mauris</div>
+                    <div class="chatLeft" *ngIf="time>=1500">Nulla at nulla eget lectus ultrices sollicitudin ac a
+                        turpis. Ut consequat arcu non velit dignissim consequat. Suspendisse potenti. Nulla sit amet
+                        enim mauris</div>
+
+                    <!--Gender-->
+                    <div class="form-group" *ngIf="time>=2000" scrollTo>
+                        <div class="chatLeft">Male? Female? Select one option</div>
+                        <div class="alignRight">
+                            <input type="radio" name="gender" value="male" #gender="ngModel" [(ngModel)]="user.gender">
+                            Male <br />
+                            <input type="radio" name="gender" value="female" #gender="ngModel"
+                                [(ngModel)]="user.gender">
+                            Female<br />
+                            <input type="radio" name="gender" value="other" #gender="ngModel" [(ngModel)]="user.gender">
+                            Other<br />
+                            <input type="radio" name="gender" value="not response" #gender="ngModel"
+                                [(ngModel)]="user.gender"> Not response <br />
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
+
+                    <!--Age-->
+                    <div class="form-group" *ngIf="user.gender" scrollTo>
+                        <div class="chatLeft">How old are you?</div>
+                        <input type="number" name="age" #age (keyup.enter)="updateAge(age.value)"
+                            class="alignRight numberInput" required />
+                    </div>
+                    <div class="clearfix"></div>
+
+                    <!--Address-->
+                    <div class="form-group" *ngIf="user.gender && user.age" scrollTo>
+                        <div class="chatLeft">What is your address?</div>
+                        <input type="text" name="address" #address (keyup.enter)="updateAddress(address.value)"
+                            class="alignRight numberInput" required />
+                    </div>
+                    <div class="clearfix"></div>
+
+                    <!--PostalCode-->
+                    <div class="form-group" *ngIf="user.address && user.address != '' && user.age && user.gender"
+                        scrollTo>
+                        <div class="chatLeft">What is your postal code?</div>
+                        <input type="text" name="pc" #pc (keyup.enter)="updatePC(pc.value)"
+                            class="alignRight numberInput" required  />
+                    </div>
+                    <div class="clearfix"></div>
+
+                    <!--Job-->
+                    <div class="form-group"
+                        *ngIf="user.address && user.address != '' && user.age && user.gender && user.postalCode && user.postalCode != ''"
+                        scrollTo>
+                        <div class="chatLeft">What is your job?</div>
+                        <div class="alignRight">
+                            <input type="radio" name="job" value="healthcare personnel" #gender="ngModel"
+                                [(ngModel)]="user.job">
+                            Healthcare personnel<br />
+                            <input type="radio" name="job" value="security forces" #gender="ngModel"
+                                [(ngModel)]="user.job">
+                            Security forces<br />
+                            <input type="radio" name="job" value="food industry" #gender="ngModel"
+                                [(ngModel)]="user.job"> Food industry<br />
+                            <input type="radio" name="job" value="transport" #gender="ngModel" [(ngModel)]="user.job">
+                            Transport<br />
+                            <input type="radio" name="job" value="cleaning" #gender="ngModel" [(ngModel)]="user.job">
+                            Cleaning<br />
+                            <input type="radio" name="job" value="commerce" #gender="ngModel" [(ngModel)]="user.job">
+                            Commerce<br />
+                            <input type="radio" name="job" value="construction" #gender="ngModel"
+                                [(ngModel)]="user.job">
+                            Construction<br />
+                            <input type="radio" name="job" value="other" #gender="ngModel" [(ngModel)]="user.job">
+                            Other<br />
+                            <div *ngIf="user.job == 'other'" scrollTo>
+                                <p>Which one?</p>
+                                <input style="background: white; color: black;" type="text" name="job" #job
+                                    (keyup.enter)="getOtherJob(job.value)" class="alignRight numberInput" required />
+                            </div>
+
+                            <div *ngIf="otherJobTouched" scrollTo>
+                                <p>Which one?</p>
+                                <input style="background: white; color: black;" type="text" name="job" #job
+                                    (keyup.enter)="getOtherJob(job.value)" class="alignRight numberInput" value={{user.job}} required />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
+
+
+                    <!--Symptons-->
+                    <div *ngIf="user.address && user.address != '' && user.age && user.gender && user.postalCode && user.postalCode != '' && user.job && user.job != '' && user.job != 'other'"
+                        scrollTo>
+                        <div class="chatLeft">What symptons do you have?</div>
+
+                        <div class="alignRight" *ngFor="let sympton of symptons" scrollTo>
+                            <input (change)="onChangeSymptons(sympton.value, $event.target.checked)"
+                                name="{{ sympton.name_es }}" type="checkbox" id="{{sympton.name_es}}">
+                            <label class="form-check-label" for="{{sympton.name_es}}">
+                                {{sympton.name_es}}
+                            </label>
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
+
+                    <!--Diagnosis-->
+                    <div
+                        *ngIf="user.address && user.address != '' && user.age && user.gender && user.postalCode && user.postalCode != '' && user.job && user.job != '' && user.job != 'otro' && user.symptons.length >= 1">
+                        <div class="chatLeft">Have you any previous diagnosis?</div>
+
+                        <div class="alignRight" *ngFor="let diagno of diagnos">
+                            <input (change)="onChangeDiagnosis(diagno.value, $event.target.checked)"
+                                name="{{ diagno.name_es }}" type="checkbox" id="{{diagno.name_es}}">
+                            <label class="form-check-label" for="{{diagno.name_es}}">
+                                {{diagno.name_es}}
+                            </label>
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
+
+                    <!--Smoke-->
+                    <div class="form-group"
+                        *ngIf="user.address && user.address != '' && user.age && user.gender && user.postalCode && user.postalCode != '' && user.job && user.job != '' && user.job != 'otro' && user.symptons.length >= 1 && user.diagnosis.length >= 1"
+                        scrollTo>
+                        <div class="chatLeft">Do you smoke?</div>
+                        <div class="alignRight">
+                            <input type="radio" name="smoke" value="yes" #smoke="ngModel" [(ngModel)]="user.smoke">
+                            Yes <br />
+                            <input type="radio" name="smoke" value="less than five" #smoke="ngModel"
+                                [(ngModel)]="user.smoke"> I have not smoked for less than 5 years <br />
+                            <input type="radio" name="smoke" value="more than five" #smoke="ngModel"
+                                [(ngModel)]="user.smoke">
+                            I have not smoked for more than 5 years <br />
+                            <input type="radio" name="smoke" value="no" #smoke="ngModel" [(ngModel)]="user.smoke">
+                            I have never smoke <br />
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
+
+                    <!--Test-->
+                    <div class="form-group"
+                        *ngIf="user.address && user.address != '' && user.age && user.gender && user.postalCode && user.postalCode != '' && user.job && user.job != '' && user.job != 'otro' && user.symptons.length >= 1 && user.diagnosis.length >= 1 && user.smoke"
+                        scrollTo>
+                        <div class="chatLeft">With respect to COVID-19. Have you been diagnosed by a test?</div>
+                        <div class="alignRight">
+                            <input type="radio" name="test" value="yes" #test="ngModel" [(ngModel)]="user.test">
+                            Yes <br />
+                            <input type="radio" name="test" value="no" #test="ngModel" [(ngModel)]="user.test">
+                            No <br />
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
+
+                    <!--Date-->
+                    <div class="form-group" *ngIf="user.test == 'yes'" scrollTo>
+                        <div class="chatLeft">When have you been diagnosed? </div>
+                        <div class="alignRight">
+                            <input type="date" name="date" #date="ngModel" [(ngModel)]="user.date" />
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
+
+                    <!--Where-->
+                    <div class="form-group" *ngIf="user.test == 'yes' && user.date" scrollTo>
+                        <div class="chatLeft">In case of being diagnosed, where do you are located right now?</div>
+                        <div class="alignRight">
+                            <input type="radio" name="where" value="isolated home" #gender="ngModel"
+                                [(ngModel)]="user.where">
+                            Isolated at home<br />
+                            <input type="radio" name="where" value="hotel" #gender="ngModel" [(ngModel)]="user.where">
+                            In a hotel<br />
+                            <input type="radio" name="where" value="hospitalized" #gender="ngModel"
+                                [(ngModel)]="user.where"> Hospitalized<br />
+                            <input type="radio" name="where" value="recovered home" #gender="ngModel"
+                                [(ngModel)]="user.where">
+                            Recovered and at home<br />
+                            <input type="radio" name="where" value="other" #gender="ngModel" [(ngModel)]="user.where">
+                            Other<br />
+                            <div *ngIf="user.where == 'other'" scrollTo>
+                                <p>Which one?</p>
+                                <input style="background: white; color: black;" type="text" name="where" #where
+                                    (keyup.enter)="getOtherWhere(where.value)" class="alignRight numberInput" required />
+                            </div>
+
+                            <div *ngIf="otherWhereTouched" scrollTo>
+                                <p>Which one?</p>
+                                <input style="background: white; color: black;" type="text" name="where" #where
+                                    (keyup.enter)="getOtherWhere(where.value)" class="alignRight numberInput" value={{user.where}} required />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
+
+                    <!--infection-->
+                    <div class="form-group" *ngIf="user.test == 'yes' && user.date && user.where && user.where != 'other'" scrollTo>
+                        <div class="chatLeft">How do you think you have been infected? </div>
+                        <div class="alignRight">
+                            <input type="radio" name="infection" value="international travel" #gender="ngModel"
+                                [(ngModel)]="user.infection">
+                            International travel<br />
+                            <input type="radio" name="infection" value="national travel" #gender="ngModel"
+                                [(ngModel)]="user.infection">
+                            National travel<br />
+                            <input type="radio" name="infection" value="work" #gender="ngModel"
+                                [(ngModel)]="user.infection"> At work<br />
+                            <input type="radio" name="infection" value="family" #gender="ngModel"
+                                [(ngModel)]="user.infection">
+                            By a relative<br />
+                            <input type="radio" name="infection" value="other" #gender="ngModel"
+                                [(ngModel)]="user.infection">
+                            Other<br />
+                            <div *ngIf="user.infection == 'other'" scrollTo>
+                                <p>Which one?</p>
+                                <input style="background: white; color: black;" type="text" name="infection" #infection
+                                    (keyup.enter)="getOtherInfection(infection.value)" class="alignRight numberInput" required />
+                            </div>
+
+                            <div *ngIf="otherInfectionTouched" scrollTo>
+                                <p>Which one?</p>
+                                <input style="background: white; color: black;" type="text" name="where" #where
+                                    (keyup.enter)="getOtherInfection(infection.value)" class="alignRight numberInput" value={{user.infection}} required />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
+
+                    <div *ngIf="user.test == 'no' || (user.date && user.where && user.infection && user.infection != 'other')" scrollTo>
+                        <input type="submit" value="Finish" class="center" (click)="Submit()" />
+                    </div>
+                </form>
+            </section>
+        </div>
+
+    </div>
 </div>
