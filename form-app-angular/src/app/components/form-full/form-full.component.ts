@@ -104,6 +104,7 @@ export class FormFullComponent implements OnInit {
         if (response.status == "success") {
           this.status = "success";
           this.user = response.user;
+          this.refresh();
         } else {
           this.status = "error";
         }
@@ -113,7 +114,6 @@ export class FormFullComponent implements OnInit {
         this.status = "error";
       }
     )
-    this.refresh();
   }
 
   refresh(): void {
