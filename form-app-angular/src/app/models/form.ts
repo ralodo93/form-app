@@ -1,6 +1,5 @@
 export class Form {
     constructor(
-        public _id: string,
         public gender: string,
         public age: number,
         public address: string,

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ɵConsole } from '@angular/core';
 import { FormBuilder, FormGroup, FormArray, FormControl, Validators } from '@angular/forms';
 import { FormService } from '../../services/form.service';
 import { Form } from '../../models/form'
@@ -61,7 +61,7 @@ export class FormFullComponent implements OnInit {
   constructor(private fb: FormBuilder,
     private _formService: FormService) {
 
-    this.user = new Form("", "", null, "", "", "", [], [], "", "", "", "", "");
+    this.user = new Form("", null, "", "", "", [], [], "", "", "", "", "");
   }
 
   ngOnInit(): void {
@@ -99,6 +99,7 @@ export class FormFullComponent implements OnInit {
 
   Submit() {
     this.startSurvey = false;
+    console.log(this.user);
     this._formService.postForm(this.user).subscribe(
       response => {
         if (response.status == "success") {
@@ -113,7 +114,7 @@ export class FormFullComponent implements OnInit {
         this.status = "error";
       }
     )
-    this.refresh()
+    // this.refresh();
   }
 
   refresh(): void {
