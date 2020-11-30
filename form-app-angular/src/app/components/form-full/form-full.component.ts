@@ -22,6 +22,12 @@ export class FormFullComponent implements OnInit {
   otherInfectionTouched = false;
   startSurvey = false;
   public status: string;
+  valueAge: any;
+  valueAddress: any;
+  valuePostalCode:any;
+  valueWhere:any;
+  valueJob:any;
+  valueInfection:any;
 
   diagnos = [
     { name_es: 'Cáncer', name_en: "Cancer", value: 'cancer' },

@@ -1,8 +1,9 @@
 /* You can add global styles to this file, and also import other style files */
 
 #app {
-    position:absolute; top:500px; left:500px;
+    position:absolute; top:10px; left:10px;
     max-width: 250px;
+    margin-bottom: 10px;
 }
 
 #rectangle{
@@ -24,4 +25,11 @@
     height:500px;
     background: pink;
     position:absolute; top:500px; left:0px;
+}
+
+#rectangle4{
+    width:1000px;
+    height:100px;
+    background: rgb(29, 187, 187);
+    position:absolute; top:1250px; left:0px;
 }

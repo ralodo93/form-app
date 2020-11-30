@@ -40,25 +40,32 @@
                     <!--Age-->
                     <div class="form-group" *ngIf="user.gender" scrollTo>
                         <div class="chatLeft">¿Cual es tu edad?</div>
-                        <input type="number" name="age" #age (keyup.enter)="updateAge(age.value)"
+                        <input type="number" name="age" #age="ngModel" [(ngModel)]="valueAge"
                             class="alignRight numberInput" required />
+                        <div class="clearfix"></div>
+                        <input type="submit" value="" class="alignRight numberInput" (click)="updateAge(valueAge)" />
                     </div>
                     <div class="clearfix"></div>
+
 
                     <!--Address-->
                     <div class="form-group" *ngIf="user.gender && user.age" scrollTo>
                         <div class="chatLeft">¿Cual es tu calle?</div>
-                        <input type="text" name="address" #address (keyup.enter)="updateAddress(address.value)"
+                        <input type="text" name="address" #address="ngModel" [(ngModel)]="valueAddress"
                             class="alignRight numberInput" required />
+                        <div class="clearfix"></div>
+                        <input type="submit" value="" class="alignRight numberInput"
+                            (click)="updateAddress(valueAddress)" />
                     </div>
                     <div class="clearfix"></div>
 
                     <!--PostalCode-->
-                    <div class="form-group" *ngIf="user.address && user.address != '' && user.age && user.gender"
-                        scrollTo>
-                        <div class="chatLeft">¿Codigo postal?</div>
-                        <input type="text" name="pc" #pc (keyup.enter)="updatePC(pc.value)"
-                            class="alignRight numberInput" required />
+                    <div class="form-group" *ngIf="user.gender && user.age && user.address" scrollTo>
+                        <div class="chatLeft">¿Cual es tu código postal?</div>
+                        <input type="text" name="pc" #pc="ngModel" [(ngModel)]="valuePC" class="alignRight numberInput"
+                            required />
+                        <div class="clearfix"></div>
+                        <input type="submit" value="" class="alignRight numberInput" (click)="updatePC(valuePC)" />
                     </div>
                     <div class="clearfix"></div>
 
@@ -75,7 +82,8 @@
                                 [(ngModel)]="user.job">
                             Cuerpo de seguridad<br />
                             <input type="radio" name="job" value="food industry" #gender="ngModel"
-                                [(ngModel)]="user.job"> Alimentación<br />
+                                [(ngModel)]="user.job">
+                            Alimentación<br />
                             <input type="radio" name="job" value="transport" #gender="ngModel" [(ngModel)]="user.job">
                             Transporte<br />
                             <input type="radio" name="job" value="cleaning" #gender="ngModel" [(ngModel)]="user.job">
@@ -89,14 +97,18 @@
                             Otro<br />
                             <div *ngIf="user.job == 'other'" scrollTo>
                                 <p>¿Cuál?</p>
-                                <input style="background: white; color: black;" type="text" name="job" #job
-                                    (keyup.enter)="getOtherJob(job.value)" class="alignRight numberInput" required />
+                                <input style="background: white; color: black;" type="text" name="job" #job="ngModel"
+                                    [(ngModel)]="valueJob" class="alignRight numberInput" required />
+                                <div class="clearfix"></div>
+                                <input type="submit" value="" class="other" (click)="getOtherJob(valueJob)" />
                             </div>
 
                             <div *ngIf="otherJobTouched" scrollTo>
                                 <p>¿Cuál?</p>
-                                <input style="background: white; color: black;" type="text" name="job" #job
-                                    (keyup.enter)="getOtherJob(job.value)" class="alignRight numberInput" value={{user.job}} required />
+                                <input style="background: white; color: black;" type="text" name="job" #job="ngModel"
+                                    [(ngModel)]="valueJob" class="alignRight numberInput" value="user.job" required />
+                                <div class="clearfix"></div>
+                                <input type="submit"  value="" class="other" (click)="getOtherJob(valueJob)" />
                             </div>
                         </div>
                     </div>
@@ -196,21 +208,26 @@
                             Otro<br />
                             <div *ngIf="user.where == 'other'" scrollTo>
                                 <p>¿Cuál?</p>
-                                <input style="background: white; color: black;" type="text" name="where" #where
-                                    (keyup.enter)="getOtherWhere(where.value)" class="alignRight numberInput" required />
+                                <input style="background: white; color: black;" type="text" name="where"
+                                    #where="ngModel" [(ngModel)]="valueWhere" class="alignRight numberInput" required />
+                                <input type="submit"  value="" class="other"
+                                    (click)="getOtherWhere(valueWhere)" />
                             </div>
 
                             <div *ngIf="otherWhereTouched" scrollTo>
                                 <p>¿Cuál?</p>
-                                <input style="background: white; color: black;" type="text" name="where" #where
-                                    (keyup.enter)="getOtherWhere(where.value)" class="alignRight numberInput" value={{user.where}} required />
+                                <input style="background: white; color: black;" type="text" name="where"
+                                    #where="ngModel" [(ngModel)]="valueWhere" class="alignRight numberInput"
+                                    value="user.where" required />
+                                <input type="submit"  value="" class="other" (click)="getOtherWhere(valueJob)" />
                             </div>
                         </div>
                     </div>
                     <div class="clearfix"></div>
 
                     <!--infection-->
-                    <div class="form-group" *ngIf="user.test == 'yes' && user.date && user.where != 'other' && user.where" scrollTo>
+                    <div class="form-group"
+                        *ngIf="user.test == 'yes' && user.date && user.where != 'other' && user.where" scrollTo>
                         <div class="chatLeft">¿Cómo cree que ha sido contagiado?</div>
                         <div class="alignRight">
                             <input type="radio" name="infection" value="international travel" #gender="ngModel"
@@ -229,21 +246,28 @@
                             Otro<br />
                             <div *ngIf="user.infection == 'other'" scrollTo>
                                 <p>¿Cuál?</p>
-                                <input style="background: white; color: black;" type="text" name="infection" #infection
-                                    (keyup.enter)="getOtherInfection(infection.value)" class="alignRight numberInput" required />
+                                <input style="background: white; color: black;" type="text" name="infection"
+                                    #infection="ngModel" [(ngModel)]="valueInfection" class="alignRight numberInput"
+                                    required />
+                                <input type="submit"  value="" class="other"
+                                    (click)="getOtherInfection(valueInfection)" />
                             </div>
 
-                            <div *ngIf="otherInfectionTouched" scrollTo>
+                            <div *ngIf="otherWhereTouched" scrollTo>
                                 <p>¿Cuál?</p>
-                                <input style="background: white; color: black;" type="text" name="infection" #infection
-                                    (keyup.enter)="getOtherInfection(infection.value)" class="alignRight numberInput" value={{user.infection}} required />
+                                <input style="background: white; color: black;" type="text" name="infection"
+                                    #infection="ngModel" [(ngModel)]="valueInfection" class="alignRight numberInput"
+                                    value="user.where" required />
+                                <input type="submit"  value="" class="other"
+                                    (click)="getOtherInfection(valueInfection)" />
                             </div>
                         </div>
                     </div>
                     <div class="clearfix"></div>
 
-                    <div *ngIf="user.test == 'no' || (user.date && user.where && user.infection && user.infection != 'other')" scrollTo>
-                        <input type="submit" value="Enviar" class="center" (click)="Submit()" />
+                    <div *ngIf="user.test == 'no' || (user.date && user.where && user.infection && user.infection != 'other')"
+                        scrollTo>
+                        <input type="submit" id = "sendForm_es" value="" class="center" (click)="Submit()" />
                     </div>
                 </form>
             </section>
@@ -280,28 +304,29 @@
                     </div>
                     <div class="clearfix"></div>
 
-                    <!--Age-->
                     <div class="form-group" *ngIf="user.gender" scrollTo>
                         <div class="chatLeft">How old are you?</div>
-                        <input type="number" name="age" #age (keyup.enter)="updateAge(age.value)"
+                        <input type="number" name="age" #age="ngModel" [(ngModel)]="valueAge"
                             class="alignRight numberInput" required />
+                        <input type="submit"  value="" class="alignRight numberInput" (click)="updateAge(valueAge)" />
                     </div>
                     <div class="clearfix"></div>
 
                     <!--Address-->
                     <div class="form-group" *ngIf="user.gender && user.age" scrollTo>
                         <div class="chatLeft">What is your address?</div>
-                        <input type="text" name="address" #address (keyup.enter)="updateAddress(address.value)"
+                        <input type="text" name="address" #address="ngModel" [(ngModel)]="valueAddress"
                             class="alignRight numberInput" required />
+                        <input type="submit" value="" class="alignRight numberInput" (click)="updateAddress(valueAddress)" />
                     </div>
                     <div class="clearfix"></div>
 
                     <!--PostalCode-->
-                    <div class="form-group" *ngIf="user.address && user.address != '' && user.age && user.gender"
-                        scrollTo>
+                    <div class="form-group" *ngIf="user.gender && user.age && user.address" scrollTo>
                         <div class="chatLeft">What is your postal code?</div>
-                        <input type="text" name="pc" #pc (keyup.enter)="updatePC(pc.value)"
-                            class="alignRight numberInput" required  />
+                        <input type="text" name="pc" #pc="ngModel" [(ngModel)]="valuePC" class="alignRight numberInput"
+                            required />
+                        <input type="submit" value="" class="alignRight numberInput" (click)="updatePC(valuePC)" />
                     </div>
                     <div class="clearfix"></div>
 
@@ -332,14 +357,16 @@
                             Other<br />
                             <div *ngIf="user.job == 'other'" scrollTo>
                                 <p>Which one?</p>
-                                <input style="background: white; color: black;" type="text" name="job" #job
-                                    (keyup.enter)="getOtherJob(job.value)" class="alignRight numberInput" required />
+                                <input style="background: white; color: black;" type="text" name="job" #job="ngModel"
+                                    [(ngModel)]="valueJob" class="alignRight numberInput" required />
+                                <input type="submit" value="" class="other" (click)="getOtherJob(valueJob)" />
                             </div>
 
                             <div *ngIf="otherJobTouched" scrollTo>
                                 <p>Which one?</p>
-                                <input style="background: white; color: black;" type="text" name="job" #job
-                                    (keyup.enter)="getOtherJob(job.value)" class="alignRight numberInput" value={{user.job}} required />
+                                <input style="background: white; color: black;" type="text" name="job" #job="ngModel"
+                                    [(ngModel)]="valueJob" class="alignRight numberInput" value="user.job" required />
+                                <input type="submit" value="" class="other" (click)="getOtherJob(valueJob)" />
                             </div>
                         </div>
                     </div>
@@ -436,21 +463,25 @@
                             Other<br />
                             <div *ngIf="user.where == 'other'" scrollTo>
                                 <p>Which one?</p>
-                                <input style="background: white; color: black;" type="text" name="where" #where
-                                    (keyup.enter)="getOtherWhere(where.value)" class="alignRight numberInput" required />
+                                <input style="background: white; color: black;" type="text" name="where"
+                                    #where="ngModel" [(ngModel)]="valueWhere" class="alignRight numberInput" required />
+                                <input type="submit" value="" class="other" (click)="getOtherWhere(valueWhere)" />
                             </div>
 
                             <div *ngIf="otherWhereTouched" scrollTo>
                                 <p>Which one?</p>
-                                <input style="background: white; color: black;" type="text" name="where" #where
-                                    (keyup.enter)="getOtherWhere(where.value)" class="alignRight numberInput" value={{user.where}} required />
+                                <input style="background: white; color: black;" type="text" name="where"
+                                    #where="ngModel" [(ngModel)]="valueWhere" class="alignRight numberInput"
+                                    value="user.where" required />
+                                <input type="submit" value="" class="other" (click)="getOtherWhere(valueJob)" />
                             </div>
                         </div>
                     </div>
                     <div class="clearfix"></div>
 
                     <!--infection-->
-                    <div class="form-group" *ngIf="user.test == 'yes' && user.date && user.where && user.where != 'other'" scrollTo>
+                    <div class="form-group"
+                        *ngIf="user.test == 'yes' && user.date && user.where && user.where != 'other'" scrollTo>
                         <div class="chatLeft">How do you think you have been infected? </div>
                         <div class="alignRight">
                             <input type="radio" name="infection" value="international travel" #gender="ngModel"
@@ -469,21 +500,28 @@
                             Other<br />
                             <div *ngIf="user.infection == 'other'" scrollTo>
                                 <p>Which one?</p>
-                                <input style="background: white; color: black;" type="text" name="infection" #infection
-                                    (keyup.enter)="getOtherInfection(infection.value)" class="alignRight numberInput" required />
+                                <input style="background: white; color: black;" type="text" name="infection"
+                                    #infection="ngModel" [(ngModel)]="valueInfection" class="alignRight numberInput"
+                                    required />
+                                <input type="submit" value="" class="other"
+                                    (click)="getOtherInfection(valueInfection)" />
                             </div>
 
-                            <div *ngIf="otherInfectionTouched" scrollTo>
+                            <div *ngIf="otherWhereTouched" scrollTo>
                                 <p>Which one?</p>
-                                <input style="background: white; color: black;" type="text" name="where" #where
-                                    (keyup.enter)="getOtherInfection(infection.value)" class="alignRight numberInput" value={{user.infection}} required />
+                                <input style="background: white; color: black;" type="text" name="infection"
+                                    #infection="ngModel" [(ngModel)]="valueInfection" class="alignRight numberInput"
+                                    value="user.where" required />
+                                <input type="submit" value="" class="other"
+                                    (click)="getOtherInfection(valueInfection)" />
                             </div>
                         </div>
                     </div>
                     <div class="clearfix"></div>
 
-                    <div *ngIf="user.test == 'no' || (user.date && user.where && user.infection && user.infection != 'other')" scrollTo>
-                        <input type="submit" value="Finish" class="center" (click)="Submit()" />
+                    <div *ngIf="user.test == 'no' || (user.date && user.where && user.infection && user.infection != 'other')"
+                        scrollTo>
+                        <input type="submit" id = "sendForm_en" value="" class="center" (click)="Submit()" />
                     </div>
                 </form>
             </section>

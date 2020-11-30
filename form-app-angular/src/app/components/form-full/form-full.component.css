@@ -1,6 +1,6 @@
 .body-full{
     background: rgb(158, 201, 218);
-    height: 700px;
+    height: 1000px;
     width: 200%;
     padding-top: 5px;
     overflow-y: scroll;
@@ -108,4 +108,37 @@ input[type='checkbox']:checked:after {
     display: inline-block;
     visibility: visible;
     border: 2px solid white;
+}
+
+input[type='submit']{
+    background:url("../../../assets/images/button_next.svg");
+    width: 30px;
+    height: 30px;
+    border: none;
+    background-position: center center;
+    margin-top: 5px;
+}
+
+.other{
+    width: 10%;
+    float: right;
+    margin-right: 25px;
+}
+
+#sendForm_es{
+    background:url("../../../assets/images/enviar.svg");
+    width: 100px;
+    height: 30px;
+    border: none;
+    background-position: center center;
+    margin-top: 5px;
+}
+
+#sendForm_en{
+    background:url("../../../assets/images/finish.svg");
+    width: 100px;
+    height: 30px;
+    border: none;
+    background-position: center center;
+    margin-top: 5px;
 }
