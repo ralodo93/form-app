@@ -99,7 +99,6 @@ export class FormFullComponent implements OnInit {
 
   Submit() {
     this.startSurvey = false;
-    console.log(this.user);
     this._formService.postForm(this.user).subscribe(
       response => {
         if (response.status == "success") {
@@ -114,7 +113,7 @@ export class FormFullComponent implements OnInit {
         this.status = "error";
       }
     )
-    // this.refresh();
+    this.refresh();
   }
 
   refresh(): void {

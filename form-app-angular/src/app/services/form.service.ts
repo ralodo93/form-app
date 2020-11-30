@@ -19,7 +19,6 @@ export class FormService {
 
   postForm(form):Observable<any>{
     let params = JSON.stringify(form);
-    console.log(params);
     let headers = new HttpHeaders().set('Content-Type','application/json');
     return this._http.post(this.url+'save',params,{headers:headers});
   }
