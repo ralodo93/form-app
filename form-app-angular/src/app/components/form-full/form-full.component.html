@@ -385,9 +385,9 @@
 
                         <div class="alignRight" *ngFor="let sympton of symptons" scrollTo>
                             <input (change)="onChangeSymptons(sympton.value, $event.target.checked)"
-                                name="{{ sympton.name_es }}" type="checkbox" id="{{sympton.name_es}}">
-                            <label class="form-check-label" for="{{sympton.name_es}}">
-                                {{sympton.name_es}}
+                                name="{{ sympton.name_en }}" type="checkbox" id="{{sympton.name_en}}">
+                            <label class="form-check-label" for="{{sympton.name_en}}">
+                                {{sympton.name_en}}
                             </label>
                         </div>
                     </div>
@@ -400,9 +400,9 @@
 
                         <div class="alignRight" *ngFor="let diagno of diagnos">
                             <input (change)="onChangeDiagnosis(diagno.value, $event.target.checked)"
-                                name="{{ diagno.name_es }}" type="checkbox" id="{{diagno.name_es}}">
-                            <label class="form-check-label" for="{{diagno.name_es}}">
-                                {{diagno.name_es}}
+                                name="{{ diagno.name_en }}" type="checkbox" id="{{diagno.name_en}}">
+                            <label class="form-check-label" for="{{diagno.name_en}}">
+                                {{diagno.name_en}}
                             </label>
                         </div>
                     </div>
