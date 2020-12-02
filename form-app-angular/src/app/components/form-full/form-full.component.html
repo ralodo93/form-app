@@ -93,6 +93,8 @@
                             <input type="radio" name="job" value="construction" #gender="ngModel"
                                 [(ngModel)]="user.job">
                             Construcción<br />
+                            <input type="radio" name="job" value="unemployed" #gender="ngModel" [(ngModel)]="user.job">
+                            Desempleado<br />
                             <input type="radio" name="job" value="other" #gender="ngModel" [(ngModel)]="user.job">
                             Otro<br />
                             <div *ngIf="user.job == 'other'" scrollTo>
@@ -108,7 +110,7 @@
                                 <input style="background: white; color: black;" type="text" name="job" #job="ngModel"
                                     [(ngModel)]="valueJob" class="alignRight numberInput" value="user.job" required />
                                 <div class="clearfix"></div>
-                                <input type="submit"  value="" class="other" (click)="getOtherJob(valueJob)" />
+                                <input type="submit" value="" class="other" (click)="getOtherJob(valueJob)" />
                             </div>
                         </div>
                     </div>
@@ -208,18 +210,19 @@
                             Otro<br />
                             <div *ngIf="user.where == 'other'" scrollTo>
                                 <p>¿Cuál?</p>
-                                <input style="background: white; color: black;" type="text" name="where" #where="ngModel"
-                                    [(ngModel)]="valueWhere" class="alignRight numberInput" required />
+                                <input style="background: white; color: black;" type="text" name="where"
+                                    #where="ngModel" [(ngModel)]="valueWhere" class="alignRight numberInput" required />
                                 <div class="clearfix"></div>
                                 <input type="submit" value="" class="other" (click)="getOtherWhere(valueWhere)" />
                             </div>
 
                             <div *ngIf="otherWhereTouched" scrollTo>
                                 <p>¿Cuál?</p>
-                                <input style="background: white; color: black;" type="text" name="where" #where="ngModel"
-                                    [(ngModel)]="valueWhere" class="alignRight numberInput" value="user.where" required />
+                                <input style="background: white; color: black;" type="text" name="where"
+                                    #where="ngModel" [(ngModel)]="valueWhere" class="alignRight numberInput"
+                                    value="user.where" required />
                                 <div class="clearfix"></div>
-                                <input type="submit"  value="" class="other" (click)="getOtherWhere(valueWhere)" />
+                                <input type="submit" value="" class="other" (click)="getOtherWhere(valueWhere)" />
                             </div>
                         </div>
                     </div>
@@ -246,18 +249,22 @@
                             Otro<br />
                             <div *ngIf="user.infection == 'other'" scrollTo>
                                 <p>¿Cuál?</p>
-                                <input style="background: white; color: black;" type="text" name="infection" #infection="ngModel"
-                                    [(ngModel)]="valueInfection" class="alignRight numberInput" required />
+                                <input style="background: white; color: black;" type="text" name="infection"
+                                    #infection="ngModel" [(ngModel)]="valueInfection" class="alignRight numberInput"
+                                    required />
                                 <div class="clearfix"></div>
-                                <input type="submit" value="" class="other" (click)="getOtherInfection(valueInfection)" />
+                                <input type="submit" value="" class="other"
+                                    (click)="getOtherInfection(valueInfection)" />
                             </div>
 
                             <div *ngIf="otherinfectionTouched" scrollTo>
                                 <p>¿Cuál?</p>
-                                <input style="background: white; color: black;" type="text" name="infection" #infection="ngModel"
-                                    [(ngModel)]="valueinfection" class="alignRight numberInput" value="user.infection" required />
+                                <input style="background: white; color: black;" type="text" name="infection"
+                                    #infection="ngModel" [(ngModel)]="valueinfection" class="alignRight numberInput"
+                                    value="user.infection" required />
                                 <div class="clearfix"></div>
-                                <input type="submit"  value="" class="other" (click)="getOtherInfection(valueInfection)" />
+                                <input type="submit" value="" class="other"
+                                    (click)="getOtherInfection(valueInfection)" />
                             </div>
                         </div>
                     </div>
@@ -265,7 +272,7 @@
 
                     <div *ngIf="user.test == 'no' || (user.date && user.where && user.infection && user.infection != 'other')"
                         scrollTo>
-                        <input type="submit" id = "sendForm_es" value="" class="center" (click)="Submit()" />
+                        <input type="submit" id="sendForm_es" value="" class="center" (click)="Submit()" />
                     </div>
                 </form>
             </section>
@@ -356,6 +363,8 @@
                             <input type="radio" name="job" value="construction" #gender="ngModel"
                                 [(ngModel)]="user.job">
                             Construction<br />
+                            <input type="radio" name="job" value="unemployed" #gender="ngModel" [(ngModel)]="user.job">
+                            Unemployed<br />
                             <input type="radio" name="job" value="other" #gender="ngModel" [(ngModel)]="user.job">
                             Other<br />
                             <div *ngIf="user.job == 'other'" scrollTo>
@@ -371,7 +380,7 @@
                                 <input style="background: white; color: black;" type="text" name="job" #job="ngModel"
                                     [(ngModel)]="valueJob" class="alignRight numberInput" value="user.job" required />
                                 <div class="clearfix"></div>
-                                <input type="submit"  value="" class="other" (click)="getOtherJob(valueJob)" />
+                                <input type="submit" value="" class="other" (click)="getOtherJob(valueJob)" />
                             </div>
                         </div>
                     </div>
@@ -468,18 +477,19 @@
                             Other<br />
                             <div *ngIf="user.where == 'other'" scrollTo>
                                 <p>Which?</p>
-                                <input style="background: white; color: black;" type="text" name="where" #where="ngModel"
-                                    [(ngModel)]="valueWhere" class="alignRight numberInput" required />
+                                <input style="background: white; color: black;" type="text" name="where"
+                                    #where="ngModel" [(ngModel)]="valueWhere" class="alignRight numberInput" required />
                                 <div class="clearfix"></div>
                                 <input type="submit" value="" class="other" (click)="getOtherWhere(valueWhere)" />
                             </div>
 
                             <div *ngIf="otherWhereTouched" scrollTo>
                                 <p>Which?</p>
-                                <input style="background: white; color: black;" type="text" name="where" #where="ngModel"
-                                    [(ngModel)]="valueWhere" class="alignRight numberInput" value="user.where" required />
+                                <input style="background: white; color: black;" type="text" name="where"
+                                    #where="ngModel" [(ngModel)]="valueWhere" class="alignRight numberInput"
+                                    value="user.where" required />
                                 <div class="clearfix"></div>
-                                <input type="submit"  value="" class="other" (click)="getOtherWhere(valueWhere)" />
+                                <input type="submit" value="" class="other" (click)="getOtherWhere(valueWhere)" />
                             </div>
                         </div>
                     </div>
@@ -506,18 +516,22 @@
                             Other<br />
                             <div *ngIf="user.infection == 'other'" scrollTo>
                                 <p>Which?</p>
-                                <input style="background: white; color: black;" type="text" name="infection" #infection="ngModel"
-                                    [(ngModel)]="valueInfection" class="alignRight numberInput" required />
+                                <input style="background: white; color: black;" type="text" name="infection"
+                                    #infection="ngModel" [(ngModel)]="valueInfection" class="alignRight numberInput"
+                                    required />
                                 <div class="clearfix"></div>
-                                <input type="submit" value="" class="other" (click)="getOtherInfection(valueInfection)" />
+                                <input type="submit" value="" class="other"
+                                    (click)="getOtherInfection(valueInfection)" />
                             </div>
 
                             <div *ngIf="otherinfectionTouched" scrollTo>
                                 <p>Which?</p>
-                                <input style="background: white; color: black;" type="text" name="infection" #infection="ngModel"
-                                    [(ngModel)]="valueinfection" class="alignRight numberInput" value="user.infection" required />
+                                <input style="background: white; color: black;" type="text" name="infection"
+                                    #infection="ngModel" [(ngModel)]="valueinfection" class="alignRight numberInput"
+                                    value="user.infection" required />
                                 <div class="clearfix"></div>
-                                <input type="submit"  value="" class="other" (click)="getOtherInfection(valueInfection)" />
+                                <input type="submit" value="" class="other"
+                                    (click)="getOtherInfection(valueInfection)" />
                             </div>
                         </div>
                     </div>
@@ -525,7 +539,7 @@
 
                     <div *ngIf="user.test == 'no' || (user.date && user.where && user.infection && user.infection != 'other')"
                         scrollTo>
-                        <input type="submit" id = "sendForm_en" value="" class="center" (click)="Submit()" />
+                        <input type="submit" id="sendForm_en" value="" class="center" (click)="Submit()" />
                     </div>
                 </form>
             </section>
