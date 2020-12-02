@@ -1,11 +1,12 @@
 .body-full{
     background: rgb(158, 201, 218);
     height: 1000px;
-    width: 200%;
+    width: 800px;
     padding-top: 5px;
     overflow-y: scroll;
     overflow: auto;
     font-size: 18px;
+    position:absolute; left:50px;
 }
 
 .center {

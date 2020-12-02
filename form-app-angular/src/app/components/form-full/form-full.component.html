@@ -10,19 +10,13 @@
             <section id="content">
                 <form class="mid-form">
 
-                    <div class="chatLeft" *ngIf="time>=500">Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                        Cras blandit eleifend pharetra. Nulla ante urna, vehicula ac est et, tincidunt condimentum
-                        velit.</div>
-                    <div class="chatLeft" *ngIf="time>=1000">Nulla at nulla eget lectus ultrices sollicitudin ac a
-                        turpis. Ut consequat arcu non velit dignissim consequat. Suspendisse potenti. Nulla sit amet
-                        enim mauris</div>
-                    <div class="chatLeft" *ngIf="time>=1500">Nulla at nulla eget lectus ultrices sollicitudin ac a
-                        turpis. Ut consequat arcu non velit dignissim consequat. Suspendisse potenti. Nulla sit amet
-                        enim mauris</div>
+                    <div class="chatLeft" *ngIf="time>=500">Bienvenido! A continuación vamos a hacerte una serie de preguntas en referencia a la enfermedad de la COVID19.</div>
+                    <div class="chatLeft" *ngIf="time>=1000">Los datos obtenidos de la siguiente encuesta serán utilizados por la Unidad de Bioinformática del Centro Pfizer – Universidad de Granada – Junta de Andalucía de Genómica e Investigación Oncológica (GENYO).</div>
+                    <div class="chatLeft" *ngIf="time>=1500">No te preocupes, las respuestas que nos proporciones son totalmente anónimas!</div>
 
                     <!--Gender-->
                     <div class="form-group" *ngIf="time>=2000" scrollTo>
-                        <div class="chatLeft">¿Hombre?¿Mujer? Seleccione una de las opciones</div>
+                        <div class="chatLeft">¿Hombre?¿Mujer? Selecciona una de las opciones</div>
                         <div class="alignRight">
                             <input type="radio" name="gender" value="male" #gender="ngModel" [(ngModel)]="user.gender">
                             Hombre <br />
@@ -73,7 +67,7 @@
                     <div class="form-group"
                         *ngIf="user.address && user.address != '' && user.age && user.gender && user.postalCode && user.postalCode != ''"
                         scrollTo>
-                        <div class="chatLeft">¿En que trabajas?</div>
+                        <div class="chatLeft">¿En que trabajas? Selecciona una opción o pulsa en Otro y escribe tu ocupación</div>
                         <div class="alignRight">
                             <input type="radio" name="job" value="healthcare personnel" #gender="ngModel"
                                 [(ngModel)]="user.job">
@@ -120,7 +114,7 @@
                     <!--Symptons-->
                     <div *ngIf="user.address && user.address != '' && user.age && user.gender && user.postalCode && user.postalCode != '' && user.job && user.job != '' && user.job != 'other'"
                         scrollTo>
-                        <div class="chatLeft">¿Qué síntomas tiene?</div>
+                        <div class="chatLeft">¿Tienes algún síntoma? Si es así pulsa los síntomas que tengas. En caso contrario pulsa Ninguno</div>
 
                         <div class="alignRight" *ngFor="let sympton of symptons" scrollTo>
                             <input (change)="onChangeSymptons(sympton.value, $event.target.checked)"
@@ -135,7 +129,7 @@
                     <!--Diagnosis-->
                     <div
                         *ngIf="user.address && user.address != '' && user.age && user.gender && user.postalCode && user.postalCode != '' && user.job && user.job != '' && user.job != 'otro' && user.symptons.length >= 1">
-                        <div class="chatLeft">¿Tiene alguna patología previa?</div>
+                        <div class="chatLeft">¿Tienes alguna patología previa? Si es así pulsa las patologías previas que tengas. En caso contrario pulsa Ninguno</div>
 
                         <div class="alignRight" *ngFor="let diagno of diagnos">
                             <input (change)="onChangeDiagnosis(diagno.value, $event.target.checked)"
@@ -151,7 +145,7 @@
                     <div class="form-group"
                         *ngIf="user.address && user.address != '' && user.age && user.gender && user.postalCode && user.postalCode != '' && user.job && user.job != '' && user.job != 'otro' && user.symptons.length >= 1 && user.diagnosis.length >= 1"
                         scrollTo>
-                        <div class="chatLeft">¿Fuma?</div>
+                        <div class="chatLeft">¿Fumas? Marca una opción</div>
                         <div class="alignRight">
                             <input type="radio" name="smoke" value="yes" #smoke="ngModel" [(ngModel)]="user.smoke">
                             Fumo actualmente <br />
@@ -171,7 +165,7 @@
                     <div class="form-group"
                         *ngIf="user.address && user.address != '' && user.age && user.gender && user.postalCode && user.postalCode != '' && user.job && user.job != '' && user.job != 'otro' && user.symptons.length >= 1 && user.diagnosis.length >= 1 && user.smoke"
                         scrollTo>
-                        <div class="chatLeft">Referente a la enfermedad del COVID-19. ¿Ha sido diagnosticado de la
+                        <div class="chatLeft">Referente a la enfermedad del COVID-19. ¿Has sido diagnosticado de la
                             enfermedad por un test?</div>
                         <div class="alignRight">
                             <input type="radio" name="test" value="yes" #test="ngModel" [(ngModel)]="user.test">
@@ -184,7 +178,7 @@
 
                     <!--Date-->
                     <div class="form-group" *ngIf="user.test == 'yes'" scrollTo>
-                        <div class="chatLeft">¿En que fecha fue diagnosticado?</div>
+                        <div class="chatLeft">¿En que fecha fuiste diagnosticado?</div>
                         <div class="alignRight">
                             <input type="date" name="date" #date="ngModel" [(ngModel)]="user.date" />
                         </div>
@@ -194,7 +188,7 @@
                     <!--Where-->
                     <div class="form-group" *ngIf="user.test == 'yes' && user.date" scrollTo>
                         <div class="chatLeft">En caso de haber sido diagnosticado de la enfermedad de COVID-19. ¿Dónde
-                            está actualmente?</div>
+                            estás actualmente?</div>
                         <div class="alignRight">
                             <input type="radio" name="where" value="isolated home" #gender="ngModel"
                                 [(ngModel)]="user.where">
@@ -231,7 +225,7 @@
                     <!--infection-->
                     <div class="form-group"
                         *ngIf="user.test == 'yes' && user.date && user.where != 'other' && user.where" scrollTo>
-                        <div class="chatLeft">¿Cómo cree que ha sido contagiado?</div>
+                        <div class="chatLeft">¿Cómo crees que has sido contagiado?</div>
                         <div class="alignRight">
                             <input type="radio" name="infection" value="international travel" #gender="ngModel"
                                 [(ngModel)]="user.infection">
@@ -282,15 +276,9 @@
             <section id="content">
                 <form class="mid-form">
 
-                    <div class="chatLeft" *ngIf="time>=500">Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                        Cras blandit eleifend pharetra. Nulla ante urna, vehicula ac est et, tincidunt condimentum
-                        velit.</div>
-                    <div class="chatLeft" *ngIf="time>=1000">Nulla at nulla eget lectus ultrices sollicitudin ac a
-                        turpis. Ut consequat arcu non velit dignissim consequat. Suspendisse potenti. Nulla sit amet
-                        enim mauris</div>
-                    <div class="chatLeft" *ngIf="time>=1500">Nulla at nulla eget lectus ultrices sollicitudin ac a
-                        turpis. Ut consequat arcu non velit dignissim consequat. Suspendisse potenti. Nulla sit amet
-                        enim mauris</div>
+                    <div class="chatLeft" *ngIf="time>=500">Wellcome! Were are going to ask some questions related to COVID19.</div>
+                    <div class="chatLeft" *ngIf="time>=1000">Data will be used by the Bioinformatic Unit of Centro Pfizer – Universidad de Granada – Junta de Andalucía de Genómica e Investigación Oncológica (GENYO).</div>
+                    <div class="chatLeft" *ngIf="time>=1500">Don't worry, the answers are totally anonymous.</div>
 
                     <!--Gender-->
                     <div class="form-group" *ngIf="time>=2000" scrollTo>
@@ -344,7 +332,7 @@
                     <div class="form-group"
                         *ngIf="user.address && user.address != '' && user.age && user.gender && user.postalCode && user.postalCode != ''"
                         scrollTo>
-                        <div class="chatLeft">What is your job?</div>
+                        <div class="chatLeft">What is your job? Select one option or select Other and write your job in case there are not between the options</div>
                         <div class="alignRight">
                             <input type="radio" name="job" value="healthcare personnel" #gender="ngModel"
                                 [(ngModel)]="user.job">
@@ -390,7 +378,7 @@
                     <!--Symptons-->
                     <div *ngIf="user.address && user.address != '' && user.age && user.gender && user.postalCode && user.postalCode != '' && user.job && user.job != '' && user.job != 'other'"
                         scrollTo>
-                        <div class="chatLeft">What symptons do you have?</div>
+                        <div class="chatLeft">What symptons do you have? Select all detected symptons or select Any in case you do not have symptons</div>
 
                         <div class="alignRight" *ngFor="let sympton of symptons" scrollTo>
                             <input (change)="onChangeSymptons(sympton.value, $event.target.checked)"
@@ -405,7 +393,7 @@
                     <!--Diagnosis-->
                     <div
                         *ngIf="user.address && user.address != '' && user.age && user.gender && user.postalCode && user.postalCode != '' && user.job && user.job != '' && user.job != 'otro' && user.symptons.length >= 1">
-                        <div class="chatLeft">Have you any previous diagnosis?</div>
+                        <div class="chatLeft">Have you any previous diagnosis? Select all previous diagnosis that you have or select Any in case you do not have previous diagnosis</div>
 
                         <div class="alignRight" *ngFor="let diagno of diagnos">
                             <input (change)="onChangeDiagnosis(diagno.value, $event.target.checked)"

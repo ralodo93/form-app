@@ -1,0 +1,12 @@
+.app-logo{
+    max-width: 200px;  
+    height: auto;      
+}
+
+.logo {
+    display: inline-block;
+}
+
+.datact {
+    max-height: 50px !important;
+}

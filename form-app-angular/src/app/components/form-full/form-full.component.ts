@@ -1,7 +1,8 @@
 import { Component, OnInit, ɵConsole } from '@angular/core';
 import { FormBuilder, FormGroup, FormArray, FormControl, Validators } from '@angular/forms';
 import { FormService } from '../../services/form.service';
-import { Form } from '../../models/form'
+import { Form } from '../../models/form';
+import swal from 'sweetalert';
 
 @Component({
   selector: 'app-form-full',
@@ -24,10 +25,10 @@ export class FormFullComponent implements OnInit {
   public status: string;
   valueAge: any;
   valueAddress: any;
-  valuePostalCode:any;
-  valueWhere:any;
-  valueJob:any;
-  valueInfection:any;
+  valuePostalCode: any;
+  valueWhere: any;
+  valueJob: any;
+  valueInfection: any;
 
   diagnos = [
     { name_es: 'Cáncer', name_en: "Cancer", value: 'cancer' },
@@ -98,6 +99,17 @@ export class FormFullComponent implements OnInit {
   submitFormDiagn() { if (this.form.value.checkArray.length > 0) { this.user.diagnosis.push(this.form.value.checkArray); } this.form = this.fb.group({ checkArray: this.fb.array([], [Validators.required]) }) }
 
   Submit() {
+    console.log(this.lang);
+    if (this.lang == "spanish") {
+      swal({
+        title: "Encuesta finalizada!",
+        text: "Muchas gracias!",
+        icon: "success",
+      });
+    }
+    if (this.lang == "english") {
+      swal("Finish form!", "Thank you so much!", "success");
+    }
     this.startSurvey = false;
     this._formService.postForm(this.user).subscribe(
       response => {
@@ -137,5 +149,13 @@ export class FormFullComponent implements OnInit {
       this.time = 2000;
     }, 2000);
 
+  }
+
+  wait(ms) {
+    var start = new Date().getTime();
+    var end = start;
+    while (end < start + ms) {
+      end = new Date().getTime();
+    }
   }
 }

@@ -1,0 +1,8 @@
+.logo-footer{
+    max-width: 200px;  
+    height: auto;      
+}
+
+footer{
+    position:absolute; top:1100px; left:200px;
+}
