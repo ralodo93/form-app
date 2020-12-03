@@ -44,3 +44,5 @@ ng serve
 <img src="./form-app-angular/src/assets/images/example.png"
      alt="Example"
      style="float: left; margin-right: 10px;" />
+
+7. If all is correct you can route the file form-app-angular/src/index.html to your web direction
